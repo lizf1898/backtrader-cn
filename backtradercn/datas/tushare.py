@@ -7,7 +7,7 @@ from backtradercn.settings import settings as conf
 from backtradercn.libs.log import get_logger
 from backtradercn.libs.models import get_or_create_library
 
-
+pro = ts.pro_api()
 logger = get_logger(__name__)
 
 
@@ -25,8 +25,10 @@ class TsHisData(object):
         self._lib_name = conf.CN_STOCK_LIBNAME
         self._coll_name = coll_name
         self._library = get_or_create_library(self._lib_name)
+        # self._unused_cols = ['price_change', 'p_change', 'ma5', 'ma10', 'ma20',
+        #                      'v_ma5', 'v_ma10', 'v_ma20', 'turnover']
         self._unused_cols = ['price_change', 'p_change', 'ma5', 'ma10', 'ma20',
-                             'v_ma5', 'v_ma10', 'v_ma20', 'turnover']
+                             'v_ma5', 'v_ma10', 'v_ma20']
         self._new_added_colls = []
 
     @classmethod
@@ -70,6 +72,8 @@ class TsHisData(object):
         latest_date = self.get_data().index[-1]
         start = latest_date + dt.timedelta(days=1)
         start = dt.datetime.strftime(start, '%Y-%m-%d')
+
+        # start = '2000-01-01'
 
         his_data = ts.get_hist_data(
             code=self._coll_name,

@@ -2,7 +2,7 @@ beautifulsoup4 # tushare require
 lxml # tushare require
 xlrd # tushare require
 requests # tushae require
-pandas==0.20.1
+pandas==0.24.0
 backtrader
 tushare
 arctic

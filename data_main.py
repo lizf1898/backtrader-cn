@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
 import gevent.pool
 import gevent.monkey
+gevent.monkey.patch_all()
+
 import tushare as ts
+# 设置token，只需设置一次! 初始化接口
+ts.set_token('1afa396cfef9804ec51c1e51b5d85187fb5aea6bac4b8238a00143f8')
+pro = ts.pro_api()
+
 import backtradercn.datas.tushare as bdt
 from backtradercn.libs.log import get_logger
 from backtradercn.libs import models
 from backtradercn.settings import settings as conf
 
 
-gevent.monkey.patch_all()
+
 logger = get_logger(__name__)
 
 
@@ -37,9 +43,14 @@ if __name__ == '__main__':
 
     # download_delta_data(['000651', '000001'])
 
-    hs300s = ts.get_hs300s()
-    stock_pools = hs300s['code'].tolist() if 'code' in hs300s else []
+    # hs300s = ts.get_hs300s()
+    # stock_pools = hs300s['code'].tolist() if 'code' in hs300s else []
+
+    # 查询当前所有正常上市交易的股票列表
+    data = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+    stock_pools = data['symbol'].tolist() if 'symbol' in data else []
+
     if not stock_pools:
-        logger.warning('can not ts.geths300s() return empty.')
+        logger.warning('can not stock pools return empty.')
         stock_pools = models.get_cn_stocks()
     download_delta_data(stock_pools)
