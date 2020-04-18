@@ -22,4 +22,4 @@ class Utils(object):
 
     @classmethod
     def parse_date(cls, date_string):
-        return datetime.datetime.strptime(date_string, '%Y-%m-%d')
+        return datetime.datetime.strptime(date_string, '%Y%m%d')

@@ -47,8 +47,8 @@ if __name__ == '__main__':
     # stock_pools = hs300s['code'].tolist() if 'code' in hs300s else []
 
     # 查询当前所有正常上市交易的股票列表
-    data = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
-    stock_pools = data['symbol'].tolist() if 'symbol' in data else []
+    data = pro.stock_basic(exchange='SSE', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+    stock_pools = data['ts_code'].tolist() if 'ts_code' in data else []
 
     if not stock_pools:
         logger.warning('can not stock pools return empty.')
