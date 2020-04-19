@@ -50,6 +50,8 @@ if __name__ == '__main__':
     data = pro.stock_basic(exchange='SSE', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
     stock_pools = data['ts_code'].tolist() if 'ts_code' in data else []
 
+    # stock_pools = ['600000.SH','600036.SH']
+
     if not stock_pools:
         logger.warning('can not stock pools return empty.')
         stock_pools = models.get_cn_stocks()
