@@ -5,7 +5,9 @@ gevent.monkey.patch_all()
 
 import tushare as ts
 # 设置token，只需设置一次! 初始化接口
-ts.set_token('1afa396cfef9804ec51c1e51b5d85187fb5aea6bac4b8238a00143f8')
+# ts.set_token('1afa396cfef9804ec51c1e51b5d85187fb5aea6bac4b8238a00143f8')
+ts.set_token('ac16b470869c5d82db5033ae9288f77b282d2b5519507d6d2c72fdd7')
+
 pro = ts.pro_api()
 
 import backtradercn.datas.tushare as bdt
@@ -47,7 +49,7 @@ if __name__ == '__main__':
     # stock_pools = hs300s['code'].tolist() if 'code' in hs300s else []
 
     # 查询当前所有正常上市交易的股票列表
-    data = pro.stock_basic(exchange='SSE', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+    data = pro.stock_basic(exchange='SZSE', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
     stock_pools = data['ts_code'].tolist() if 'ts_code' in data else []
 
     # stock_pools = ['600000.SH','600036.SH']

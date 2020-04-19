@@ -68,10 +68,11 @@ class TsHisData(object):
 
         # 15:00 PM can get today data
         # start = latest_date + 1 day
-        # latest_date = self.get_data().index[-1]
-        # start_date = latest_date + dt.timedelta(days=1)
-        # start_date = dt.datetime.strftime(start_date, '%Y%m%d')
-        start_date = '20000101'
+        latest_date = self.get_data().index[-1]
+        start_date = latest_date + dt.timedelta(days=1)
+        start_date = dt.datetime.strftime(start_date, '%Y%m%d')
+
+        start_date = '19900101'
 
         # his_data = ts.get_hist_data(
         #     code=self._coll_name,
